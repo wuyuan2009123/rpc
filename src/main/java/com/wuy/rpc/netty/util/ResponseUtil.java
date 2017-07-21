@@ -1,6 +1,8 @@
 package com.wuy.rpc.netty.util;
 
-import com.wuy.rpc.netty.handler.param.Response;
+import com.wuy.rpc.pojo.Response;
+
+
 
 public class ResponseUtil {
 	public static Response createSuccessResult() {

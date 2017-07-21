@@ -1,9 +1,9 @@
 package com.wuy.rpc.netty.handler;
 
 import com.alibaba.fastjson.JSONObject;
-import com.wuy.rpc.netty.handler.param.Response;
 import com.wuy.rpc.netty.handler.param.ServerRequest;
 import com.wuy.rpc.netty.media.Media;
+import com.wuy.rpc.pojo.Response;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -16,6 +16,7 @@ public class SimpleServerHandler extends ChannelInboundHandlerAdapter {
 	public void channelRead(ChannelHandlerContext ctx, Object msg)
 			throws Exception {
 		try {
+
 			System.out.println("服务器接收到请求........"+msg);
 			if ("ping".equals(msg.toString())) {
 				return;

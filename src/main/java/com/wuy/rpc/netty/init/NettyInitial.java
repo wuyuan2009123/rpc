@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
 
 import com.wuy.rpc.netty.factory.ZookeeperFactory;
 import com.wuy.rpc.netty.handler.SimpleServerHandler;
-import com.wuy.rpc.netty.constant.Constants;
+import com.wuy.rpc.pojo.Constants;
 
 @Component
 public class NettyInitial implements ApplicationListener<ContextRefreshedEvent> {
@@ -67,11 +67,12 @@ public class NettyInitial implements ApplicationListener<ContextRefreshedEvent> 
 			// int port=8081;
 			// int weight=1;
 			// +"#"+port+"#"+weight+"#"
+			String weight = System.getProperty("weight","2");
 			client.create()
 					.withMode(CreateMode.EPHEMERAL_SEQUENTIAL)
 					.forPath(
 							Constants.SERVER_PATH + "/"
-									+ netAddress.getHostAddress());
+									+ netAddress.getHostAddress()+"#"+port+"#"+weight+"#");
 
 			f.channel().closeFuture().sync();
 

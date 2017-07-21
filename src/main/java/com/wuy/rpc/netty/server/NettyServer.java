@@ -22,11 +22,13 @@ import org.apache.zookeeper.CreateMode;
 
 import com.wuy.rpc.netty.factory.ZookeeperFactory;
 import com.wuy.rpc.netty.handler.SimpleServerHandler;
-import com.wuy.rpc.netty.constant.Constants;
+import com.wuy.rpc.pojo.Constants;
 
-public class NettyServer {
+public class NettyServer  {
 
 	public static void main(String[] args) {
+		String port = System.getProperty("port","8081");
+		String weight = System.getProperty("weight","1");
 		EventLoopGroup parentGroup = new NioEventLoopGroup();
 		EventLoopGroup childGroup = new NioEventLoopGroup();
 		try {
@@ -55,7 +57,7 @@ public class NettyServer {
 								}
 							});
 
-			ChannelFuture f = bootstrap.bind(8081).sync();
+			ChannelFuture f = bootstrap.bind(Integer.valueOf(port)).sync();
 			CuratorFramework client = ZookeeperFactory.create();
 			InetAddress netAddress = InetAddress.getLocalHost();
 
@@ -67,7 +69,7 @@ public class NettyServer {
 					.withMode(CreateMode.EPHEMERAL_SEQUENTIAL)
 					.forPath(
 							Constants.SERVER_PATH + "/"
-									+ netAddress.getHostAddress());
+									+ netAddress.getHostAddress()+"#"+port+"#"+weight+"#");
 
 			f.channel().closeFuture().sync();
 

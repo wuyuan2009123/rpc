@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSONObject;
-import com.wuy.rpc.netty.handler.param.Response;
 import com.wuy.rpc.netty.handler.param.ServerRequest;
+import com.wuy.rpc.pojo.Response;
 
 public class Media {
 	public static Map<String,BeanMethod> beanMap;
