@@ -30,7 +30,7 @@ import com.wuy.rpc.netty.constant.Constants;
 @Component
 public class NettyInitial implements ApplicationListener<ContextRefreshedEvent> {
 
-	public  void start() {
+	public  void start(String port) {
 		EventLoopGroup parentGroup = new NioEventLoopGroup();
 		EventLoopGroup childGroup = new NioEventLoopGroup();
 		try {
@@ -59,7 +59,7 @@ public class NettyInitial implements ApplicationListener<ContextRefreshedEvent> 
 								}
 							});
 
-			ChannelFuture f = bootstrap.bind(8081).sync();
+			ChannelFuture f = bootstrap.bind(Integer.valueOf(port)).sync();
 			CuratorFramework client = ZookeeperFactory.create();
 			InetAddress netAddress = InetAddress.getLocalHost();
 
@@ -84,7 +84,8 @@ public class NettyInitial implements ApplicationListener<ContextRefreshedEvent> 
 	}
 
 	public void onApplicationEvent(ContextRefreshedEvent event) {
-		this.start();
+		String port = System.getProperty("port","8080");
+		this.start(port);
 	}
 
 }
