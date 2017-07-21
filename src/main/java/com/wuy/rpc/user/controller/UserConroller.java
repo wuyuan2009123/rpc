@@ -18,4 +18,8 @@ public class UserConroller {
 	public Response saves(List<User> users){
 		return ResponseUtil.createSuccessResult(users);
 	}
+	
+	public Response add(int a,float b){
+		return ResponseUtil.createSuccessResult(a+": a , b: "+b);
+	}
 }

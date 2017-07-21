@@ -18,6 +18,24 @@ public class TcpTest {
 	public static void main(String[] args) {
 		
 		List<User> userList=new ArrayList<User>();
+		User u = new User();
+		u.setId(1L);
+		u.setName("wuy");
+		userList.add(u);
+		
+		ClientRequest request=new ClientRequest();
+		/*request.setCommand("com.wuy.rpc.user.controller.UserConroller.save");
+		Object[] parameters={u};*/
+		/*request.setCommand("com.wuy.rpc.user.controller.UserConroller.saves");
+		Object[] parameters={userList};*/
+		request.setCommand("com.wuy.rpc.user.controller.UserConroller.add");
+		Object[] parameters={1,1.2};
+		request.setParameters(parameters);
+		System.out.println("ThreadName : "+Thread.currentThread().getName()+"  ,reuqest:  "+request);
+		Response response = TcpClient.send(request);
+		System.out.println("ThreadName : "+Thread.currentThread().getName()+"  ,response:  "+response);
+		
+		/*List<User> userList=new ArrayList<User>();
 		for(int i=0;i<=1000;i++){
 			User user = new User();
 			user.setId((long)i);
@@ -31,7 +49,8 @@ public class TcpTest {
 				public void run() {
 					ClientRequest request=new ClientRequest();
 					request.setCommand("com.wuy.rpc.user.controller.UserConroller.save");
-					request.setContent(u);
+					Object[] parameters={u};
+					request.setParameters(parameters);
 					System.out.println("ThreadName : "+Thread.currentThread().getName()+"  ,reuqest:  "+request);
 					Response response = TcpClient.send(request);
 					System.out.println("ThreadName : "+Thread.currentThread().getName()+"  ,response:  "+response);
@@ -52,7 +71,7 @@ public class TcpTest {
  				e.printStackTrace();
  			}
  		}
- 		System.out.println("shutdown after DefaultFuture.allDefaultFuture 的 size : "+DefaultFuture.allDefaultFuture.size());
+ 		System.out.println("shutdown after DefaultFuture.allDefaultFuture 的 size : "+DefaultFuture.allDefaultFuture.size());*/
 	}
 	
 

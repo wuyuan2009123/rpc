@@ -2,7 +2,7 @@ package com.wuy.rpc.netty.handler.param;
 
 public class ServerRequest {
 	private Long id;
-	private Object content;
+	private Object[] parameters;
 	private String command;
 
 	public String getCommand() {
@@ -21,11 +21,13 @@ public class ServerRequest {
 		this.id = id;
 	}
 
-	public Object getContent() {
-		return content;
+	public Object[] getParameters() {
+		return parameters;
 	}
 
-	public void setContent(Object content) {
-		this.content = content;
+	public void setParameters(Object[] parameters) {
+		this.parameters = parameters;
 	}
+
+	
 }

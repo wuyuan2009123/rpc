@@ -38,10 +38,16 @@ public class Media {
             }
             Object bean = beanMethod.getBean();
             Method m = beanMethod.getMethod();
-            Class<?> paramType = m.getParameterTypes()[0];
-            Object content = request.getContent();
-            Object args =JSONObject.parseObject(JSONObject.toJSONString(content), paramType);
-            result = (Response) m.invoke(bean, args);
+            Class<?>[] parameterTypes = m.getParameterTypes();
+            Object[] parameters = request.getParameters();
+            Object[] params=new Object[parameterTypes.length];
+            if(null!=parameterTypes){
+            	for(int i=0;i<parameterTypes.length;i++){
+            		Object param = JSONObject.parseObject(JSONObject.toJSONString(parameters[i]), parameterTypes[i]);
+            		params[i]=param;
+                }
+            }
+            result = (Response) m.invoke(bean, params);
             result.setId(request.getId());
         }catch (Exception e) {
             e.printStackTrace();
